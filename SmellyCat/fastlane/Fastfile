@@ -14,10 +14,14 @@
 fastlane_version "2.27.0"
 
 
-PROJECT_FILE_PATH = "./SmellyCat.xcodeproj"PLIST_FILE_PATH = "SmellyCat/info.plist"OUTPUT_DIRECTORY = "./"
-PROJECT_NAME = "SmellyCat"
+
 
 default_platform :ios
+
+#PROJECT_FILE_PATH = ""
+#PLIST_FILE_PATH = "SmellyCat/info.plist"
+#OUTPUT_DIRECTORY = "./"
+PROJECT_NAME = "SmellyCat"
 
 platform :ios do
   before_all do
@@ -34,14 +38,14 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-  build_app(export_method: "development",  
-	project:"#{PROJECT_FILE_PATH}",
-  	configuration: "Debug",
+    gym(export_method: "development",
   	output_directory: "./",
-    output_name: "#{PROJECT_NAME}.ipa"
-    scheme:"#{PROJECT_NAME}")
-  pgyer(api_key: "57164a07d6f38480eca90dc4b6372fa4", user_key: "e39a6560a4ae7a662a1408cf74b27728", update_description: "update by fastlane")
-  end
+    output_name: "SmellyCat.ipa",
+    scheme: "#{PROJECT_NAME}")
+    pgyer(api_key: "57164a07d6f38480eca90dc4b6372fa4",
+    user_key: "e39a6560a4ae7a662a1408cf74b27728",
+    update_description: "update by fastlane")
+end
 
   desc "Deploy a new version to the App Store"
   lane :release do
