@@ -16,6 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 100, 40)];
+    l.text = @"ViewController - SmellyCat";
+    [self.view addSubview:l];
     // Do any additional setup after loading the view.
 }
 
