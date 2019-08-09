@@ -13,6 +13,10 @@
 # Update this, if you use features of a newer version
 fastlane_version "2.27.0"
 
+
+PROJECT_FILE_PATH = "./SmellyCat.xcodeproj"PLIST_FILE_PATH = "SmellyCat/info.plist"OUTPUT_DIRECTORY = "./"
+PROJECT_NAME = "SmellyCat"
+
 default_platform :ios
 
 platform :ios do
@@ -30,12 +34,13 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-    # match(type: "appstore") # more information: https://codesigning.guide
-    gym # Build your app - more options available
-    pilot
-
-    # sh "your_script.sh"
-    # You can also use other beta testing services here (run `fastlane actions`)
+  build_app(export_method: "development",  
+	project:"#{PROJECT_FILE_PATH}",
+  	configuration: "Debug",
+  	output_directory: "./",
+    output_name: "#{PROJECT_NAME}.ipa"
+    scheme:"#{PROJECT_NAME}")
+  pgyer(api_key: "57164a07d6f38480eca90dc4b6372fa4", user_key: "e39a6560a4ae7a662a1408cf74b27728", update_description: "update by fastlane")
   end
 
   desc "Deploy a new version to the App Store"
